@@ -2,7 +2,6 @@
 
 
 # 2. Conexion con la base de datos
-import oracledb
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -21,10 +20,14 @@ class APIClima:
         data = response.json()
         return data
 api_clima = APIClima( token = os.getenv("token_weather_api") )
-clima_lampa = api_clima.obtener_clima(location="'Lampa, Chile'")
 
-while True:
-    clima = input(str("Ingrese el lugar de donde quiere obtener el clima: "))
-    clima_real = api_clima.obtener_clima(location=clima)
-    print(clima_real)
-    
+def main():
+    while True:
+     clima = input(str("Ingrese el lugar de donde quiere obtener el clima: "))
+     clima_real = api_clima.obtener_clima(location=clima)
+     if clima == "exit":
+           print("Saliendo del programa")
+           break
+     print(clima_real)
+     
+main()
